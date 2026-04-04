@@ -9,7 +9,7 @@ setopt share_history
 bindkey -v
 
 # --- Completion ---
-zstyle :compinstall filename '/home/drtino/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 autoload -Uz compinit
@@ -17,14 +17,7 @@ compinit
 
 # --- PATH ---
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:/home/drtino/Android/Sdk/emulator"
-
-# Java (Android Studio bundled JDK)
-export JAVA_HOME=/snap/android-studio/current/jbr
-# Android SDK
-export ANDROID_HOME=$HOME/Android/Sdk
-export NDK_HOME=$ANDROID_HOME/ndk/28.0.12674087
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH="$PATH:$HOME/go/bin"
 
 # --- Colors ---
 autoload -Uz colors && colors
@@ -44,8 +37,8 @@ alias l='eza -l --icons --group-directories-first'
 alias lt='eza --tree --level=2 --icons'
 
 # --- bat (reemplazo de cat) ---
-alias cat='batcat --style=auto'
-alias catp='batcat --style=plain'
+alias cat='bat --style=auto'
+alias catp='bat --style=plain'
 
 # Colored man pages
 export LESS_TERMCAP_mb=$'\e[1;31m'
@@ -56,15 +49,15 @@ export LESS_TERMCAP_so=$'\e[1;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;32m'
 export BAT_THEME="Catppuccin Mocha"
-export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # --- Plugins ---
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # --- fzf ---
-source /usr/share/doc/fzf/examples/key-bindings.zsh 2>/dev/null
-source /usr/share/doc/fzf/examples/completion.zsh 2>/dev/null
+source /usr/share/fzf/key-bindings.zsh 2>/dev/null
+source /usr/share/fzf/completion.zsh 2>/dev/null
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --color=fg:#cdd6f4,bg:#1e1e2e,hl:#f38ba8,fg+:#cdd6f4,bg+:#313244,hl+:#f38ba8,info:#cba6f7,prompt:#cba6f7,pointer:#f5e0dc,marker:#b4befe,spinner:#f5e0dc,header:#f38ba8'
 export FZF_CTRL_R_OPTS='--preview "echo {}" --preview-window=down:3:wrap'
 
@@ -151,4 +144,3 @@ eval "$(starship init zsh)"
 
 # --- fastfetch al abrir terminal ---
 fastfetch
-export PATH=$PATH:~/go/bin
