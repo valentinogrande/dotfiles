@@ -16,7 +16,6 @@ section() { echo -e "\n${GREEN}━━━ $1 ━━━${NC}"; }
 section "Installing packages (pacman)"
 
 sudo pacman -S --needed --noconfirm \
-    i3-wm \
     dex \
     xss-lock \
     network-manager-applet \
@@ -25,7 +24,6 @@ sudo pacman -S --needed --noconfirm \
     dunst \
     feh \
     polybar \
-    kitty \
     rofi \
     pipewire pipewire-pulse wireplumber pavucontrol \
     brightnessctl \
@@ -64,23 +62,12 @@ link() {
     info "Linked: $dst"
 }
 
-link "$DOTFILES/config/i3"           "$HOME/.config/i3"
-link "$DOTFILES/config/kitty"        "$HOME/.config/kitty"
 link "$DOTFILES/config/dunst"        "$HOME/.config/dunst"
 link "$DOTFILES/config/picom"        "$HOME/.config/picom"
 link "$DOTFILES/config/polybar"      "$HOME/.config/polybar"
 link "$DOTFILES/config/rofi"         "$HOME/.config/rofi"
 link "$DOTFILES/config/starship.toml" "$HOME/.config/starship.toml"
 link "$DOTFILES/home/.zshrc"         "$HOME/.zshrc"
-
-# ─── lockscreen ──────────────────────────────────────────────────────────────
-
-section "Installing lockscreen"
-
-mkdir -p "$HOME/.local/bin"
-cp "$DOTFILES/config/i3/lockscreen" "$HOME/.local/bin/lockscreen"
-chmod +x "$HOME/.local/bin/lockscreen"
-info "lockscreen -> ~/.local/bin/lockscreen"
 
 # ─── polybar scripts ─────────────────────────────────────────────────────────
 
@@ -102,5 +89,3 @@ fi
 
 echo ""
 info "Done. Re-login or run: exec zsh"
-warn "Wallpaper principal: ~/Pictures/wallpapers/aurora-iceland.jpg"
-warn "Si usas dos monitores, revisar outputs en ~/.config/i3/config (DisplayPort-0 / HDMI-A-0)"
