@@ -1,0 +1,24 @@
+#!/bin/bash
+# Lockscreen: screenshot + blur + darken + i3lock
+
+TMPIMG="/tmp/lockscreen.png"
+
+# Take screenshot
+maim "$TMPIMG"
+
+# Blur + darken + vignette
+convert "$TMPIMG" \
+    -blur 0x8 \
+    -modulate 60,80 \
+    -fill black -colorize 25% \
+    -gravity center \
+    -font "JetBrains-Mono" -pointsize 22 \
+    -fill "#c0c0c080" \
+    -annotate +0+200 "Type password to unlock" \
+    "$TMPIMG"
+
+# Lock
+i3lock -i "$TMPIMG" -e -f
+
+# Cleanup
+rm -f "$TMPIMG"

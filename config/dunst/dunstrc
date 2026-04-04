@@ -1,0 +1,75 @@
+[global]
+    monitor = 0
+    follow = mouse
+    width = (280, 400)
+    height = 150
+    origin = top-right
+    offset = 16x16
+    notification_limit = 5
+    indicate_hidden = yes
+
+    # Appearance
+    padding = 16
+    horizontal_padding = 18
+    text_icon_padding = 16
+    frame_width = 2
+    frame_color = "#5577aa"
+    separator_height = 2
+    separator_color = frame
+    corner_radius = 12
+    gap_size = 8
+    transparency = 15
+
+    # Text
+    font = JetBrains Mono 10.5
+    markup = full
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    vertical_alignment = center
+    word_wrap = yes
+    ellipsize = end
+    show_age_threshold = 30
+
+    # Icons
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 64
+    icon_corner_radius = 8
+    icon_path = /usr/share/icons/Humanity/status/48/:/usr/share/icons/Humanity/devices/48/:/usr/share/icons/Adwaita/symbolic/status/
+
+    # Progress bar
+    progress_bar = true
+    progress_bar_height = 8
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 380
+    progress_bar_corner_radius = 4
+
+    # Behavior
+    sort = yes
+    idle_threshold = 120
+    show_indicators = no
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[urgency_low]
+    background = "#0f1520ee"
+    foreground = "#8899aa"
+    frame_color = "#334455"
+    highlight = "#5577aa"
+    timeout = 4
+
+[urgency_normal]
+    background = "#0f1520ee"
+    foreground = "#c8d0e0"
+    frame_color = "#55aa88"
+    highlight = "#55aa88"
+    timeout = 6
+
+[urgency_critical]
+    background = "#1a0a10ee"
+    foreground = "#e0c0c0"
+    frame_color = "#cc4455"
+    highlight = "#cc4455"
+    timeout = 0
