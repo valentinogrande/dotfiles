@@ -81,6 +81,7 @@ chmod +x "$HOME/.config/polybar/docker.sh"
 chmod +x "$HOME/.config/rofi/powermenu.sh"
 chmod +x "$HOME/.config/rofi/bluetooth.sh"
 chmod +x "$HOME/.config/rofi/wifi.sh"
+chmod +x "$HOME/.config/rofi/brightness.sh"
 
 # ─── Services ────────────────────────────────────────────────────────────────
 
