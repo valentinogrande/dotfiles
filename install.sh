@@ -21,6 +21,7 @@ sudo pacman -S --needed --noconfirm \
     network-manager-applet \
     bluez bluez-utils blueman \
     power-profiles-daemon \
+    lazydocker \
     xorg-xrandr \
     picom \
     dunst \
@@ -76,6 +77,7 @@ link "$DOTFILES/home/.zshrc"         "$HOME/.zshrc"
 chmod +x "$HOME/.config/polybar/launch.sh"
 chmod +x "$HOME/.config/polybar/bluetooth.sh"
 chmod +x "$HOME/.config/polybar/powerprofile.sh"
+chmod +x "$HOME/.config/polybar/docker.sh"
 chmod +x "$HOME/.config/rofi/powermenu.sh"
 chmod +x "$HOME/.config/rofi/bluetooth.sh"
 chmod +x "$HOME/.config/rofi/wifi.sh"
