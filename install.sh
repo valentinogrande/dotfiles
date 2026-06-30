@@ -19,6 +19,7 @@ sudo pacman -S --needed --noconfirm \
     dex \
     xss-lock \
     network-manager-applet \
+    bluez bluez-utils blueman \
     xorg-xrandr \
     picom \
     dunst \
@@ -72,7 +73,10 @@ link "$DOTFILES/home/.zshrc"         "$HOME/.zshrc"
 # ─── polybar scripts ─────────────────────────────────────────────────────────
 
 chmod +x "$HOME/.config/polybar/launch.sh"
+chmod +x "$HOME/.config/polybar/bluetooth.sh"
 chmod +x "$HOME/.config/rofi/powermenu.sh"
+chmod +x "$HOME/.config/rofi/bluetooth.sh"
+chmod +x "$HOME/.config/rofi/wifi.sh"
 
 # ─── Shell ───────────────────────────────────────────────────────────────────
 
