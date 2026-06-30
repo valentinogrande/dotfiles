@@ -20,6 +20,7 @@ sudo pacman -S --needed --noconfirm \
     xss-lock \
     network-manager-applet \
     bluez bluez-utils blueman \
+    power-profiles-daemon \
     xorg-xrandr \
     picom \
     dunst \
@@ -74,9 +75,16 @@ link "$DOTFILES/home/.zshrc"         "$HOME/.zshrc"
 
 chmod +x "$HOME/.config/polybar/launch.sh"
 chmod +x "$HOME/.config/polybar/bluetooth.sh"
+chmod +x "$HOME/.config/polybar/powerprofile.sh"
 chmod +x "$HOME/.config/rofi/powermenu.sh"
 chmod +x "$HOME/.config/rofi/bluetooth.sh"
 chmod +x "$HOME/.config/rofi/wifi.sh"
+
+# ─── Services ────────────────────────────────────────────────────────────────
+
+# power-profiles-daemon backs the polybar power-profile toggle.
+# Do NOT run it alongside tlp / auto-cpufreq — they fight over the CPU governor.
+sudo systemctl enable --now power-profiles-daemon || warn "Could not enable power-profiles-daemon"
 
 # ─── Shell ───────────────────────────────────────────────────────────────────
 
