@@ -1,0 +1,64 @@
+# Python — pylsp (python-lsp-server)
+[[language]]
+name = "python"
+auto-format = true
+language-servers = ["pylsp"]
+
+# TypeScript / JavaScript / TSX / JSX
+[[language]]
+name = "typescript"
+auto-format = true
+language-servers = ["typescript-language-server"]
+
+[[language]]
+name = "tsx"
+auto-format = true
+language-servers = ["typescript-language-server"]
+
+[[language]]
+name = "javascript"
+auto-format = true
+language-servers = ["typescript-language-server"]
+
+[[language]]
+name = "jsx"
+auto-format = true
+language-servers = ["typescript-language-server"]
+
+# C — clangd
+[[language]]
+name = "c"
+auto-format = true
+language-servers = ["clangd"]
+
+# C++ — clangd
+[[language]]
+name = "cpp"
+auto-format = true
+language-servers = ["clangd"]
+
+# Bash — bash-language-server
+[[language]]
+name = "bash"
+language-servers = ["bash-language-server"]
+
+# Rust — rust-analyzer
+[[language]]
+name = "rust"
+auto-format = true
+language-servers = ["rust-analyzer"]
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+# SQL — sql-language-server (npm) OR sqls (AUR). Uncomment the one installed.
+[language-server.sql-language-server]
+command = "sql-language-server"
+args = ["up", "--method", "stdio"]
+
+# [language-server.sqls]
+# command = "sqls"
+
+[[language]]
+name = "sql"
+language-servers = ["sql-language-server"]

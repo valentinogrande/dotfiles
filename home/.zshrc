@@ -19,6 +19,10 @@ compinit
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 
+# --- Editor ---
+export EDITOR=nvim
+export VISUAL=nvim
+
 # --- Colors ---
 autoload -Uz colors && colors
 

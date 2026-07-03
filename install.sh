@@ -43,6 +43,7 @@ sudo pacman -S --needed --noconfirm \
     eza \
     bat \
     fzf \
+    helix \
     zsh-syntax-highlighting \
     zsh-autosuggestions \
     fastfetch \
@@ -66,6 +67,7 @@ link() {
 }
 
 link "$DOTFILES/config/dunst"        "$HOME/.config/dunst"
+link "$DOTFILES/config/helix"        "$HOME/.config/helix"
 link "$DOTFILES/config/picom"        "$HOME/.config/picom"
 link "$DOTFILES/config/polybar"      "$HOME/.config/polybar"
 link "$DOTFILES/config/rofi"         "$HOME/.config/rofi"
