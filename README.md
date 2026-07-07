@@ -35,9 +35,8 @@ El script:
 ## Post-instalación
 
 ```bash
-# Poner wallpaper en:
-mkdir -p ~/Pictures/wallpapers
-cp ~/dotfiles/config/i3/wallpaper.png ~/Pictures/wallpapers/aurora-iceland.jpg
+# El wallpaper lo copia install.sh automáticamente a
+# ~/Pictures/wallpapers/aurora-iceland.jpg
 
 # Ajustar outputs de monitor en ~/.config/i3/config si cambian los nombres:
 xrandr --query   # ver nombres reales (X11 / i3)

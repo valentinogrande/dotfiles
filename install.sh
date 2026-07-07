@@ -103,6 +103,19 @@ chmod +x "$HOME/.config/rofi/bluetooth.sh"
 chmod +x "$HOME/.config/rofi/wifi.sh"
 chmod +x "$HOME/.config/rofi/brightness.sh"
 
+# ─── Wallpaper ───────────────────────────────────────────────────────────────
+
+section "Installing wallpaper"
+
+WALLPAPER="$HOME/Pictures/wallpapers/aurora-iceland.jpg"
+if [ ! -f "$WALLPAPER" ]; then
+    mkdir -p "$(dirname "$WALLPAPER")"
+    cp "$DOTFILES/config/i3/wallpaper.png" "$WALLPAPER"
+    info "Wallpaper -> $WALLPAPER"
+else
+    info "Wallpaper already present"
+fi
+
 # ─── Services ────────────────────────────────────────────────────────────────
 
 # power-profiles-daemon backs the polybar power-profile toggle.
