@@ -50,6 +50,22 @@ sudo pacman -S --needed --noconfirm \
     ttf-jetbrains-mono-nerd \
     ttf-font-awesome
 
+# ─── Hyprland (Wayland) ──────────────────────────────────────────────────────
+# Alternativa Wayland al setup i3. Reutiliza rofi (XWayland) y dunst.
+
+sudo pacman -S --needed --noconfirm \
+    hyprland \
+    hyprpaper \
+    hyprlock \
+    hypridle \
+    hyprpolkitagent \
+    waybar \
+    xdg-desktop-portal-hyprland \
+    qt5-wayland qt6-wayland \
+    grim \
+    slurp \
+    wl-clipboard
+
 # ─── Symlinks ────────────────────────────────────────────────────────────────
 
 section "Linking configs"
@@ -68,6 +84,8 @@ link() {
 
 link "$DOTFILES/config/dunst"        "$HOME/.config/dunst"
 link "$DOTFILES/config/helix"        "$HOME/.config/helix"
+link "$DOTFILES/config/hypr"         "$HOME/.config/hypr"
+link "$DOTFILES/config/waybar"       "$HOME/.config/waybar"
 link "$DOTFILES/config/picom"        "$HOME/.config/picom"
 link "$DOTFILES/config/polybar"      "$HOME/.config/polybar"
 link "$DOTFILES/config/rofi"         "$HOME/.config/rofi"

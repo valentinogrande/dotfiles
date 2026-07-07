@@ -1,0 +1,60 @@
+/* ─── Waybar ── Tokyo Night ──────────────────────────────────────────── */
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #1a1b26;
+    color: #c0caf5;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #565f89;
+    background: transparent;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button.active {
+    color: #c0caf5;
+    background: #24283b;
+    border-bottom: 2px solid #7aa2f7;
+}
+
+#workspaces button.urgent {
+    color: #f7768e;
+    border-bottom: 2px solid #f7768e;
+}
+
+#mpris,
+#clock,
+#pulseaudio,
+#backlight,
+#disk,
+#memory,
+#cpu,
+#temperature,
+#network,
+#bluetooth,
+#battery,
+#tray {
+    padding: 0 10px;
+}
+
+#mpris { color: #9ece6a; }
+#clock { color: #c0caf5; }
+#pulseaudio { color: #7dcfff; }
+#backlight { color: #e0af68; }
+#disk { color: #bb9af7; }
+#memory { color: #7aa2f7; }
+#cpu { color: #9ece6a; }
+#temperature { color: #ff9e64; }
+#network { color: #7aa2f7; }
+#bluetooth { color: #7dcfff; }
+#battery { color: #9ece6a; }
+
+#temperature.critical { color: #f7768e; }
+#battery.warning { color: #e0af68; }
+#battery.critical { color: #f7768e; }
