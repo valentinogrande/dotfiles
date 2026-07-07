@@ -18,6 +18,7 @@ section "Installing packages (pacman)"
 sudo pacman -S --needed --noconfirm \
     dex \
     xss-lock \
+    networkmanager \
     network-manager-applet \
     bluez bluez-utils blueman \
     power-profiles-daemon \
@@ -117,6 +118,11 @@ else
 fi
 
 # ─── Services ────────────────────────────────────────────────────────────────
+
+# NetworkManager maneja wifi + DHCP. dhcpcd pelea con NM y tira la conexión;
+# se apaga para que no corran juntos.
+sudo systemctl disable --now dhcpcd 2>/dev/null || true
+sudo systemctl enable --now NetworkManager || warn "Could not enable NetworkManager"
 
 # power-profiles-daemon backs the polybar power-profile toggle.
 # Do NOT run it alongside tlp / auto-cpufreq — they fight over the CPU governor.
