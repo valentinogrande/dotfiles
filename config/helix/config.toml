@@ -1,4 +1,4 @@
-theme = "gruvbox"
+theme = "tokyonight"
 
 [editor]
 line-number = "relative"
@@ -41,3 +41,17 @@ select = "SELECT"
 
 [editor.file-picker]
 hidden = false
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error"
+
+[editor.auto-save]
+focus-lost = true
+
+[editor.soft-wrap]
+enable = true
+
+[keys.normal]
+C-g = [":write-all", ":insert-output lazygit >/dev/tty", ":redraw", ":reload-all"]
+C-y = [":sh rm -f /tmp/hx-yazi", ":insert-output yazi --chooser-file=/tmp/hx-yazi >/dev/tty", ":open %sh{cat /tmp/hx-yazi}", ":redraw"]

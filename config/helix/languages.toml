@@ -62,3 +62,24 @@ args = ["up", "--method", "stdio"]
 [[language]]
 name = "sql"
 language-servers = ["sql-language-server"]
+
+# TOML / Cargo.toml — taplo + crates-lsp (versiones de crates)
+[language-server.crates-lsp]
+command = "crates-lsp"
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+[[language]]
+name = "toml"
+language-servers = ["taplo", "crates-lsp"]
+
+# Markdown — marksman + harper-ls (ortografía/gramática)
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+
+[[language]]
+name = "markdown"
+language-servers = ["marksman", "harper-ls"]
