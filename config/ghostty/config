@@ -26,6 +26,9 @@ window-decoration = false
 window-width = 150
 window-height = 45
 confirm-close-surface = false
+
+# Ventanas nuevas siempre en ~ (la instancia de fondo puede tener otro cwd)
+working-directory = home
 gtk-tabs-location = top
 
 # Una sola instancia: ventanas nuevas salen del proceso ya abierto
