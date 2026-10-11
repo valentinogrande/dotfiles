@@ -1,6 +1,12 @@
 -- LSP: usa los servidores del sistema (los mismos que Helix) y Mason para los que faltan.
 -- Rust lo maneja rustaceanvim (rust.lua) y Cargo.toml crates.nvim.
 
+-- Diccionario propio para el corrector (LTeX+), en los dotfiles
+local dict_file = vim.fn.stdpath("config") .. "/spell/es.utf-8.add"
+local function dict_words()
+  return vim.uv.fs_stat(dict_file) and vim.fn.readfile(dict_file) or {}
+end
+
 local servers = {
   pyright = {},
   ruff = {},
@@ -10,8 +16,27 @@ local servers = {
   sqls = {},
   taplo = {},
   marksman = {},
+  -- Corrector de ortografía y gramática en español (LanguageTool)
+  ltex_plus = {
+    filetypes = { "markdown", "typst", "tex", "text" },
+    -- usa el Java 21 que trae el paquete (el del sistema es más viejo)
+    cmd_env = {
+      JAVA_HOME = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/ltex-ls-plus/*/jdk-*", false, true)[1],
+    },
+    settings = {
+      ltex = {
+        language = "es",
+        additionalRules = { motherTongue = "es" },
+        dictionary = { es = dict_words() },
+        -- como "warning" para que se vean inline (por defecto son "information")
+        diagnosticSeverity = "warning",
+      },
+    },
+    on_attach = function(client, buf) require("config.ltex").attach(client, buf) end,
+  },
+  -- Inglés: solo mensajes de commit
   harper_ls = {
-    filetypes = { "markdown", "typst", "gitcommit", "text" },
+    filetypes = { "gitcommit" },
     settings = { ["harper-ls"] = { dialect = "American" } },
   },
   lua_ls = {
@@ -30,7 +55,7 @@ local servers = {
 local mason_tools = {
   "lua-language-server", "json-lsp", "html-lsp", "css-lsp", "yaml-language-server",
   "tinymist", "ruff", "stylua", "shfmt", "prettierd", "sql-formatter",
-  "debugpy", "codelldb", "js-debug-adapter",
+  "debugpy", "codelldb", "js-debug-adapter", "ltex-ls-plus",
 }
 
 return {
@@ -55,6 +80,20 @@ return {
         end
       end
 
+      -- "Agregar al diccionario" de LTeX+ guarda la palabra en el archivo (si no, se pierde al cerrar)
+      vim.lsp.commands["_ltex.addToDictionary"] = function(cmd, ctx)
+        local new = {}
+        for _, words in pairs(cmd.arguments[1].words) do vim.list_extend(new, words) end
+        vim.fn.mkdir(vim.fn.fnamemodify(dict_file, ":h"), "p")
+        vim.fn.writefile(new, dict_file, "a")
+        local client = vim.lsp.get_client_by_id(ctx.client_id)
+        if client then
+          client.settings.ltex.dictionary = { es = dict_words() }
+          client:notify("workspace/didChangeConfiguration", { settings = client.settings })
+        end
+        vim.notify("Agregado al diccionario: " .. table.concat(new, ", "))
+      end
+
       -- Sacar los gr* por defecto de Neovim para que gr = referencias, como en Helix
       for _, k in ipairs({ "grn", "gra", "grr", "gri", "grt" }) do pcall(vim.keymap.del, "n", k) end
       pcall(vim.keymap.del, "x", "gra")
@@ -72,7 +111,10 @@ return {
           map("gy", P.lsp_type_definitions, "Definición del tipo")
           map("<leader>s", P.lsp_symbols, "Símbolos del archivo")
           map("<leader>S", P.lsp_workspace_symbols, "Símbolos del proyecto")
-          map("<leader>a", vim.lsp.buf.code_action, "Acciones de código", { "n", "x" })
+          -- en archivos de texto <leader>a es el menú del corrector (config/ltex.lua)
+          if not vim.b[ev.buf].ltex then
+            map("<leader>a", vim.lsp.buf.code_action, "Acciones de código", { "n", "x" })
+          end
           map("<leader>r", vim.lsp.buf.rename, "Renombrar")
           map("<leader>h", vim.lsp.buf.signature_help, "Firma de la función")
           map("<C-k>", vim.lsp.buf.signature_help, "Firma de la función", "i")

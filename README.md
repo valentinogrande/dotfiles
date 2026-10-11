@@ -9,7 +9,7 @@ Setup de escritorio i3 para Arch Linux.
 | `i3` | WM X11, gaps, 2 monitores, keybindings |
 | `hypr` | WM Wayland (Hyprland): hyprland, hyprpaper, hyprlock, hypridle |
 | `waybar` | Barra Wayland (equivalente a polybar) |
-| `kitty` | Terminal, transparencia, powerline tabs |
+| `ghostty` | Terminal (soporta imágenes: protocolo de kitty) |
 | `polybar` | Barra de estado con audio, batería, wifi, media |
 | `picom` | Compositor: blur, sombras, transparencia |
 | `dunst` | Notificaciones estilo dark |
@@ -72,8 +72,8 @@ dotfiles/
     ├── waybar/
     │   ├── config.jsonc
     │   └── style.css
-    ├── kitty/
-    │   └── kitty.conf
+    ├── ghostty/
+    │   └── config
     ├── polybar/
     │   ├── config.ini
     │   └── launch.sh

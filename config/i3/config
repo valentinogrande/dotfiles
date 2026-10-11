@@ -34,7 +34,7 @@ client.urgent           #cc4444   #1a1a2e   #cc4444   #cc4444   #cc4444
 
 # ─── Key Bindings ───────────────────────────────────────────────────────
 # Terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec ghostty
 
 # Kill window
 bindsym $mod+Shift+q kill
@@ -67,7 +67,7 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym $mod+n exec thunar
 
 # System monitor
-bindsym $mod+Shift+m exec kitty btop
+bindsym $mod+Shift+m exec ghostty -e btop
 
 # Lock
 bindsym $mod+Shift+x exec --no-startup-id lockscreen

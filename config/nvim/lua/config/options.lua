@@ -39,9 +39,14 @@ vim.diagnostic.config({
   severity_sort = true,
   underline = true,
   update_in_insert = false,
-  virtual_text = { severity = { min = vim.diagnostic.severity.WARN }, spacing = 2, prefix = "●" },
+  virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN },
+    spacing = 2,
+    prefix = "●",
+    format = function(d) return require("config.ltex").format(d) end,
+  },
   virtual_lines = false,
-  float = { border = "rounded", source = true },
+  float = { border = "rounded", source = true, format = function(d) return require("config.ltex").format(d) end },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "●",

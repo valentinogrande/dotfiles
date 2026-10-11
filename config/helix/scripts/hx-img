@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Helper de imágenes para Helix (kitty).
+# Helper de imágenes para Helix (Ghostty/kitty: usa chafa con el protocolo de imágenes de kitty).
 #   hx-img pick  <buffer> <language>        -> elegir imagen con fzf e imprimir referencia
 #   hx-img paste <buffer> <language>        -> guardar imagen del portapapeles e imprimir referencia
-#   hx-img view  <buffer> <línea>           -> ver imagen de la línea dentro de kitty
+#   hx-img view  <buffer> <línea>           -> ver imagen de la línea dentro de la terminal
 #   hx-img open  <buffer> <línea>           -> abrir imagen de la línea en visor externo
 set -u
 cmd=${1:-}; buf=${2:-}; arg=${3:-}
@@ -33,7 +33,7 @@ case "$cmd" in
     sel=$(find "$dir" ~/Pictures ~/Imágenes ~/Downloads ~/Descargas -maxdepth 4 -type f \
             -regextype posix-extended -iregex ".*\.($exts)" 2>/dev/null |
           fzf --prompt='imagen> ' --preview-window=right:60% \
-              --preview 'kitty icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}') || exit 0
+              --preview 'chafa -f kitty --animate=off -s ${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES} {}') || exit 0
     fmt "$(realpath --relative-to="$dir" -- "$sel")" "$arg"
     ;;
   paste)
@@ -46,11 +46,12 @@ case "$cmd" in
     ;;
   view)
     img=$(find_img) || { printf 'No encontré una imagen en la línea %s\n' "$arg" >/dev/tty; sleep 1; exit 0; }
+    read -r rows cols < <(stty size </dev/tty)
     printf '\e[2J\e[H' >/dev/tty
-    kitty +kitten icat --stdin=no --align=center "$img" </dev/tty >/dev/tty 2>&1
+    chafa -f kitty --animate=off --align center,center -s "${cols}x$((rows - 2))" "$img" >/dev/tty
     printf '\n  %s  — tecla para volver' "$img" >/dev/tty
     read -rsn1 </dev/tty
-    kitty +kitten icat --clear </dev/tty >/dev/tty 2>&1
+    printf '\e_Ga=d\e\\' >/dev/tty  # borrar imágenes (protocolo kitty)
     ;;
   open)
     img=$(find_img) || exit 0

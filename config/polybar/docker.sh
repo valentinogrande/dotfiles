@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Docker status for polybar.
 #   no arg -> whale icon + running container count (hidden when daemon is down)
-#   open   -> launch lazydocker in a kitty window
+#   open   -> launch lazydocker in a ghostty window
 
 case "$1" in
     open)
-        exec kitty --class lazydocker -e lazydocker
+        exec ghostty --class=com.lazydocker -e lazydocker
         ;;
 esac
 
