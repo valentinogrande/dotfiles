@@ -1,0 +1,62 @@
+# ─── Ghostty ── Minimalista Oscuro (portado de kitty.conf) ─────────────────
+
+# Font
+font-family = JetBrainsMono Nerd Font
+font-size = 13
+
+# Cursor (sin parpadeo)
+cursor-style = block
+cursor-style-blink = false
+cursor-color = #c0c0c0
+cursor-text = #0a0a14
+shell-integration-features = no-cursor
+
+# Scrollback (~10000 líneas)
+scrollback-limit = 10000000
+
+# Mouse
+mouse-hide-while-typing = true
+link-url = true
+
+# Ventana
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+window-decoration = false
+window-width = 150
+window-height = 45
+confirm-close-surface = false
+gtk-tabs-location = top
+
+# Una sola instancia: ventanas nuevas salen del proceso ya abierto
+gtk-single-instance = true
+quit-after-last-window-closed = false
+
+# Sin campana
+bell-features = no-system,no-audio
+
+# Sin transparencia (Hyprland no recalcula blur en cada redibujado)
+background-opacity = 1.0
+
+# ─── Color Scheme ── Minimalista Oscuro ───────────────────────────────────
+foreground = #c0c0c0
+background = #0a0a14
+selection-foreground = #0a0a14
+selection-background = #c0c0c0
+
+palette = 0=#0a0a14
+palette = 8=#555555
+palette = 1=#cc4444
+palette = 9=#dd5555
+palette = 2=#55aa55
+palette = 10=#66bb66
+palette = 3=#ccaa44
+palette = 11=#ddbb55
+palette = 4=#5577aa
+palette = 12=#6688bb
+palette = 5=#886699
+palette = 13=#9977aa
+palette = 6=#55aa99
+palette = 14=#66bbaa
+palette = 7=#c0c0c0
+palette = 15=#e0e0e0
