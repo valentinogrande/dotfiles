@@ -6,7 +6,7 @@ Setup de escritorio i3 para Arch Linux.
 
 | Config | Descripción |
 |---|---|
-| `i3` | WM X11, gaps, 2 monitores, keybindings |
+| `i3` | WM X11, gaps, keybindings |
 | `hypr` | WM Wayland (Hyprland): hyprland, hyprpaper, hyprlock, hypridle |
 | `waybar` | Barra Wayland (equivalente a polybar) |
 | `ghostty` | Terminal (soporta imágenes: protocolo de kitty) |
