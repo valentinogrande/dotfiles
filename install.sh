@@ -139,6 +139,11 @@ sudo systemctl enable --now NetworkManager || warn "Could not enable NetworkMana
 # Do NOT run it alongside tlp / auto-cpufreq — they fight over the CPU governor.
 sudo systemctl enable --now power-profiles-daemon || warn "Could not enable power-profiles-daemon"
 
+# Swap en zram del tamaño de la RAM + sysctl para zram (aplica al reiniciar)
+sudo install -Dm644 "$DOTFILES/system/zram-generator.conf" /etc/systemd/zram-generator.conf
+sudo install -Dm644 "$DOTFILES/system/99-zram.sysctl.conf" /etc/sysctl.d/99-zram.conf
+sudo sysctl --system >/dev/null
+
 # ─── Shell ───────────────────────────────────────────────────────────────────
 
 section "Setting zsh as default shell"
