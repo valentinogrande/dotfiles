@@ -27,7 +27,8 @@ return {
       },
       image = {
         enabled = true,
-        doc = { inline = true, float = true, max_width = 80, max_height = 30 },
+        -- Sin dibujo automático: se prenden con <leader>im (ver images.lua)
+        doc = { inline = false, float = false, max_width = 80, max_height = 30 },
       },
     },
     keys = {
