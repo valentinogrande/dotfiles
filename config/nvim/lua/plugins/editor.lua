@@ -8,7 +8,21 @@ return {
       words = { enabled = true },
       lazygit = { enabled = true },
       explorer = { enabled = true },
-      picker = { enabled = true, ui_select = true, sources = { files = { hidden = true } } },
+      picker = {
+        enabled = true,
+        ui_select = true,
+        sources = {
+          files = { hidden = true },
+          -- Explorador flotante como el espacio+e de Helix:
+          -- con preview y se cierra al abrir un archivo
+          explorer = {
+            hidden = true,
+            auto_close = true,
+            jump = { close = true },
+            layout = { preset = "default", preview = true },
+          },
+        },
+      },
       image = {
         enabled = true,
         doc = { inline = true, float = true, max_width = 80, max_height = 30 },
@@ -22,7 +36,8 @@ return {
       { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers abiertos" },
       { "<leader>'", function() Snacks.picker.resume() end, desc = "Reabrir último buscador" },
       { "<leader>j", function() Snacks.picker.jumps() end, desc = "Saltos" },
-      { "<leader>e", function() Snacks.explorer() end, desc = "Explorador de archivos" },
+      { "<leader>e", function() Snacks.explorer() end, desc = "Explorador (proyecto)" },
+      { "<leader>E", function() Snacks.explorer({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Explorador (carpeta del archivo)" },
       { "<leader>d", function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnósticos del archivo" },
       { "<leader>D", function() Snacks.picker.diagnostics() end, desc = "Diagnósticos del proyecto" },
       { "<leader>ok", function() Snacks.picker.keymaps() end, desc = "Todos los atajos" },
