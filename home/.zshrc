@@ -13,7 +13,8 @@ zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 autoload -Uz compinit
-compinit
+# compinit completo (con auditoría) solo si el dump tiene más de 24h
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then compinit; else compinit -C; fi
 
 # --- PATH ---
 export PATH="$HOME/.local/bin:$PATH"
@@ -140,11 +141,17 @@ gca() {
 }
 
 # --- zoxide (cd inteligente) ---
-eval "$(zoxide init zsh)"
+# Cachea la salida de `<tool> init zsh`; se regenera si el binario cambia
+_cached_init() {
+  local f=~/.cache/zsh/$1-init.zsh
+  [[ -s $f && $f -nt ${commands[$1]} ]] || { mkdir -p ${f:h}; "$@" >| $f; }
+  source $f
+}
+_cached_init zoxide init zsh
 alias cd='z'
 
 # --- Starship prompt ---
-eval "$(starship init zsh)"
+_cached_init starship init zsh
 
 # --- fastfetch al abrir terminal ---
 fastfetch
