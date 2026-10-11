@@ -29,7 +29,7 @@ local servers = {
 -- Herramientas que no estaban instaladas en el sistema
 local mason_tools = {
   "lua-language-server", "json-lsp", "html-lsp", "css-lsp", "yaml-language-server",
-  "tinymist", "ruff", "stylua", "shfmt", "prettier", "sql-formatter",
+  "tinymist", "ruff", "stylua", "shfmt", "prettierd", "sql-formatter",
   "debugpy", "codelldb", "js-debug-adapter",
 }
 

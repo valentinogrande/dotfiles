@@ -7,7 +7,8 @@ return {
           default_settings = {
             ["rust-analyzer"] = {
               check = { command = "clippy" },
-              cargo = { allFeatures = true },
+              -- target/ propio: no se pelea con tu `cargo build/run` por el lock
+              cargo = { allFeatures = true, targetDir = true },
               procMacro = { enable = true },
             },
           },

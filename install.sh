@@ -93,6 +93,7 @@ link() {
 link "$DOTFILES/config/dunst"        "$HOME/.config/dunst"
 link "$DOTFILES/config/helix"        "$HOME/.config/helix"
 link "$DOTFILES/config/nvim"         "$HOME/.config/nvim"
+link "$DOTFILES/config/kitty"        "$HOME/.config/kitty"
 link "$DOTFILES/config/hypr"         "$HOME/.config/hypr"
 link "$DOTFILES/config/waybar"       "$HOME/.config/waybar"
 link "$DOTFILES/config/picom"        "$HOME/.config/picom"

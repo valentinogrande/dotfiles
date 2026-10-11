@@ -1,6 +1,6 @@
--- Formatear al guardar (auto-format de Helix). <leader>uf lo activa/desactiva.
+-- Formatear después de guardar, en segundo plano (no traba el editor). <leader>uf lo activa/desactiva.
 return {
-  { "stevearc/conform.nvim", event = "BufWritePre", cmd = "ConformInfo",
+  { "stevearc/conform.nvim", event = { "BufReadPre", "BufNewFile" }, cmd = "ConformInfo",
     opts = {
       formatters_by_ft = {
         rust = { "rustfmt" },
@@ -10,22 +10,23 @@ return {
         lua = { "stylua" },
         sh = { "shfmt" },
         bash = { "shfmt" },
-        javascript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescript = { "prettier" },
-        typescriptreact = { "prettier" },
-        json = { "prettier" },
-        jsonc = { "prettier" },
-        css = { "prettier" },
-        scss = { "prettier" },
-        html = { "prettier" },
-        yaml = { "prettier" },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+        typescript = { "prettierd", "prettier", stop_after_first = true },
+        typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+        json = { "prettierd", "prettier", stop_after_first = true },
+        jsonc = { "prettierd", "prettier", stop_after_first = true },
+        css = { "prettierd", "prettier", stop_after_first = true },
+        scss = { "prettierd", "prettier", stop_after_first = true },
+        html = { "prettierd", "prettier", stop_after_first = true },
+        yaml = { "prettierd", "prettier", stop_after_first = true },
+        markdown = { "prettierd", "prettier", stop_after_first = true },
         sql = { "sql_formatter" },
         toml = { "taplo" },
       },
-      format_on_save = function(buf)
+      format_after_save = function(buf)
         if vim.g.autosaving or vim.g.autoformat == false or vim.b[buf].autoformat == false then return end
-        return { timeout_ms = 1000, lsp_format = "fallback" }
+        return { lsp_format = "fallback" }
       end,
     },
     keys = {
