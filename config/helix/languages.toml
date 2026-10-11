@@ -56,12 +56,12 @@ command = "clippy"
 command = "sql-language-server"
 args = ["up", "--method", "stdio"]
 
-# [language-server.sqls]
-# command = "sqls"
+[language-server.sqls]
+command = "sqls"
 
 [[language]]
 name = "sql"
-language-servers = ["sql-language-server"]
+language-servers = ["sqls"]
 
 # TOML / Cargo.toml — taplo + crates-lsp (versiones de crates)
 [language-server.crates-lsp]

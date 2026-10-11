@@ -45,6 +45,13 @@ sudo pacman -S --needed --noconfirm \
     bat \
     fzf \
     helix \
+    neovim \
+    tree-sitter-cli \
+    ripgrep \
+    fd \
+    lazygit \
+    yazi \
+    wl-clipboard \
     zsh-syntax-highlighting \
     zsh-autosuggestions \
     fastfetch \
@@ -79,12 +86,13 @@ link() {
         warn "Backup: $dst -> $dst.bak"
         mv "$dst" "$dst.bak"
     fi
-    ln -sf "$src" "$dst"
+    ln -sfn "$src" "$dst"
     info "Linked: $dst"
 }
 
 link "$DOTFILES/config/dunst"        "$HOME/.config/dunst"
 link "$DOTFILES/config/helix"        "$HOME/.config/helix"
+link "$DOTFILES/config/nvim"         "$HOME/.config/nvim"
 link "$DOTFILES/config/hypr"         "$HOME/.config/hypr"
 link "$DOTFILES/config/waybar"       "$HOME/.config/waybar"
 link "$DOTFILES/config/picom"        "$HOME/.config/picom"

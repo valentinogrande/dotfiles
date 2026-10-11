@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# Helper de imágenes para Helix (kitty).
+#   hx-img pick  <buffer> <language>        -> elegir imagen con fzf e imprimir referencia
+#   hx-img paste <buffer> <language>        -> guardar imagen del portapapeles e imprimir referencia
+#   hx-img view  <buffer> <línea>           -> ver imagen de la línea dentro de kitty
+#   hx-img open  <buffer> <línea>           -> abrir imagen de la línea en visor externo
+set -u
+cmd=${1:-}; buf=${2:-}; arg=${3:-}
+dir=$(dirname -- "$buf")
+exts='png|jpe?g|gif|webp|bmp|svg|avif|tiff?'
+
+fmt() { # $1 = ruta relativa al archivo, $2 = lenguaje
+  case "$2" in
+    markdown) printf '![](%s)' "$1" ;;
+    typst)    printf '#image("%s")' "$1" ;;
+    latex)    printf '\\includegraphics{%s}' "$1" ;;
+    html)     printf '<img src="%s" alt="">' "$1" ;;
+    *)        printf '%s' "$1" ;;
+  esac
+}
+
+find_img() { # imagen en la línea $arg del archivo $buf
+  local line path
+  line=$(sed -n "${arg}p" -- "$buf")
+  path=$(grep -oiE "[^][ ()\"'<>{}]+\.($exts)" <<<"$line" | head -n1)
+  [ -z "$path" ] && return 1
+  case "$path" in /*) ;; ~/*) path="$HOME/${path#\~/}" ;; *) path="$dir/$path" ;; esac
+  [ -f "$path" ] && printf '%s' "$path"
+}
+
+case "$cmd" in
+  pick)
+    sel=$(find "$dir" ~/Pictures ~/Imágenes ~/Downloads ~/Descargas -maxdepth 4 -type f \
+            -regextype posix-extended -iregex ".*\.($exts)" 2>/dev/null |
+          fzf --prompt='imagen> ' --preview-window=right:60% \
+              --preview 'kitty icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}') || exit 0
+    fmt "$(realpath --relative-to="$dir" -- "$sel")" "$arg"
+    ;;
+  paste)
+    type=$(wl-paste --list-types 2>/dev/null | grep -m1 '^image/') || { echo "no hay imagen en el portapapeles" >&2; exit 1; }
+    ext=${type#image/}; [ "$ext" = jpeg ] && ext=jpg
+    mkdir -p "$dir/img"
+    name="img/$(basename -- "${buf%.*}")-$(date +%Y%m%d-%H%M%S).$ext"
+    wl-paste --type "$type" > "$dir/$name"
+    fmt "$name" "$arg"
+    ;;
+  view)
+    img=$(find_img) || { printf 'No encontré una imagen en la línea %s\n' "$arg" >/dev/tty; sleep 1; exit 0; }
+    printf '\e[2J\e[H' >/dev/tty
+    kitty +kitten icat --stdin=no --align=center "$img" </dev/tty >/dev/tty 2>&1
+    printf '\n  %s  — tecla para volver' "$img" >/dev/tty
+    read -rsn1 </dev/tty
+    kitty +kitten icat --clear </dev/tty >/dev/tty 2>&1
+    ;;
+  open)
+    img=$(find_img) || exit 0
+    setsid -f xdg-open "$img" >/dev/null 2>&1
+    ;;
+  *) echo "uso: hx-img {pick|paste|view|open} <buffer> <arg>" >&2; exit 1 ;;
+esac
