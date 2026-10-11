@@ -44,7 +44,6 @@ sudo pacman -S --needed --noconfirm \
     eza \
     bat \
     fzf \
-    helix \
     ghostty \
     chafa \
     neovim \
@@ -93,7 +92,6 @@ link() {
 }
 
 link "$DOTFILES/config/dunst"        "$HOME/.config/dunst"
-link "$DOTFILES/config/helix"        "$HOME/.config/helix"
 link "$DOTFILES/config/nvim"         "$HOME/.config/nvim"
 link "$DOTFILES/config/ghostty"      "$HOME/.config/ghostty"
 link "$DOTFILES/config/hypr"         "$HOME/.config/hypr"
