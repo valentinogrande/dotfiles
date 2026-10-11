@@ -5,8 +5,12 @@ set -euo pipefail
 D="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 step() { echo -e "\033[0;32m[+]\033[0m $1"; }
 
-step "Wifi: apagar iwd (NetworkManager usa wpa_supplicant; los dos peleaban por la placa y el arranque esperaba ~1 min)"
-systemctl disable --now iwd 2>/dev/null || true
+if grep -qs '^wifi.backend=iwd' /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/conf.d/*.conf; then
+  step "Wifi: NetworkManager usa iwd como backend, lo dejo (apagarlo corta el wifi)"
+else
+  step "Wifi: apagar iwd (NetworkManager usa wpa_supplicant; los dos peleaban por la placa y el arranque esperaba ~1 min)"
+  systemctl disable --now iwd 2>/dev/null || true
+fi
 
 step "Swap en zram del tamaño de la RAM + sysctl para zram (el tamaño aplica al reiniciar)"
 install -Dm644 "$D/zram-generator.conf" /etc/systemd/zram-generator.conf
