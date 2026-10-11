@@ -28,6 +28,10 @@ $line_break$character"""
 
 palette = 'catppuccin_mocha'
 
+# Nunca esperar más de 300 ms por un comando ni 20 ms escaneando la carpeta
+command_timeout = 300
+scan_timeout = 20
+
 [palettes.catppuccin_mocha]
 color_fg0 = '#11111b'    # crust — texto oscuro sobre acentos pastel
 color_fg_dark = '#cdd6f4' # text — texto claro sobre superficies oscuras
@@ -85,6 +89,8 @@ style = "bg:color_blue"
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [c]
+# Apagado: corría `cc --version` en cada prompt (~2,7 s)
+disabled = true
 symbol = ""
 style = "bg:color_blue"
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'

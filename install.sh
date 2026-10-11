@@ -102,6 +102,8 @@ link "$DOTFILES/config/picom"        "$HOME/.config/picom"
 link "$DOTFILES/config/polybar"      "$HOME/.config/polybar"
 link "$DOTFILES/config/rofi"         "$HOME/.config/rofi"
 link "$DOTFILES/config/starship.toml" "$HOME/.config/starship.toml"
+link "$DOTFILES/config/brave-flags.conf" "$HOME/.config/brave-flags.conf"
+link "$DOTFILES/config/pacman"       "$HOME/.config/pacman"
 link "$DOTFILES/home/.zshrc"         "$HOME/.zshrc"
 
 # ─── polybar scripts ─────────────────────────────────────────────────────────
@@ -139,10 +141,8 @@ sudo systemctl enable --now NetworkManager || warn "Could not enable NetworkMana
 # Do NOT run it alongside tlp / auto-cpufreq — they fight over the CPU governor.
 sudo systemctl enable --now power-profiles-daemon || warn "Could not enable power-profiles-daemon"
 
-# Swap en zram del tamaño de la RAM + sysctl para zram (aplica al reiniciar)
-sudo install -Dm644 "$DOTFILES/system/zram-generator.conf" /etc/systemd/zram-generator.conf
-sudo install -Dm644 "$DOTFILES/system/99-zram.sysctl.conf" /etc/sysctl.d/99-zram.conf
-sudo sysctl --system >/dev/null
+# Ajustes del sistema: wifi sin iwd, zram, límites de logs, caché de pacman, logs de Docker
+sudo bash "$DOTFILES/system/optimize.sh"
 
 # ─── Shell ───────────────────────────────────────────────────────────────────
 
