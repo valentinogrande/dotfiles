@@ -155,3 +155,14 @@ _cached_init starship init zsh
 
 # --- fastfetch al abrir terminal ---
 fastfetch
+
+# --- pyenv ---
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+(( $+commands[pyenv] )) && eval "$(pyenv init - zsh)"
+
+# Android (Tauri mobile)
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export ANDROID_HOME="$HOME/Android/Sdk"
+export NDK_HOME="$ANDROID_HOME/ndk/27.2.12479018"
+export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin"
