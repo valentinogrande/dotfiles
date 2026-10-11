@@ -24,8 +24,8 @@ return {
         toml = { "taplo" },
       },
       format_on_save = function(buf)
-        if vim.g.autoformat == false or vim.b[buf].autoformat == false then return end
-        return { timeout_ms = 2000, lsp_format = "fallback" }
+        if vim.g.autosaving or vim.g.autoformat == false or vim.b[buf].autoformat == false then return end
+        return { timeout_ms = 1000, lsp_format = "fallback" }
       end,
     },
     keys = {

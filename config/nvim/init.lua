@@ -1,4 +1,5 @@
 -- Neovim: config principal. Los plugins están en lua/plugins/*.lua
+vim.loader.enable()
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -16,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "plugins" } }, {
   install = { colorscheme = { "tokyonight" } },
-  checker = { enabled = true, notify = false },
+  checker = { enabled = false },
+  performance = { rtp = { disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin", "netrwPlugin" } } },
   change_detection = { notify = false },
 })

@@ -7,6 +7,8 @@ return {
       notifier = { enabled = true },
       words = { enabled = true },
       lazygit = { enabled = true },
+      zen = { enabled = true },
+      scratch = { enabled = true },
       explorer = { enabled = true },
       picker = {
         enabled = true,
@@ -45,6 +47,9 @@ return {
       { "<leader>or", function() Snacks.picker.recent() end, desc = "Archivos recientes" },
       { "<leader>oc", function() Snacks.picker.colorschemes() end, desc = "Temas" },
       { "<leader>on", function() Snacks.notifier.show_history() end, desc = "Notificaciones" },
+      { "<leader>ou", function() Snacks.picker.undo() end, desc = "Historial de cambios (undo)" },
+      { "<leader>z", function() Snacks.zen() end, desc = "Modo zen" },
+      { "<leader>.", function() Snacks.scratch() end, desc = "Nota rápida (scratch)" },
       { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git log" },
       { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git status" },
@@ -70,5 +75,6 @@ return {
     } },
 
   { "nvim-mini/mini.pairs", event = "InsertEnter", opts = {} },
-  { "nvim-mini/mini.surround", event = "VeryLazy", opts = {} },
+  { "nvim-mini/mini.surround", event = "VeryLazy",
+    opts = { mappings = { add = "gsa", delete = "gsd", replace = "gsr", find = "gsf", find_left = "gsF", highlight = "gsh", update_n_lines = "gsn" } } },
 }

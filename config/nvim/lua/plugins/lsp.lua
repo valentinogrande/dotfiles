@@ -38,7 +38,7 @@ return {
 
   { "WhoIsSethDaniel/mason-tool-installer.nvim", lazy = false,
     dependencies = { "mason-org/mason.nvim" },
-    opts = { ensure_installed = mason_tools, run_on_start = true } },
+    opts = { ensure_installed = mason_tools, run_on_start = true, start_delay = 3000, debounce_hours = 24 } },
 
   { "folke/lazydev.nvim", ft = "lua",
     opts = { library = { { path = "${3rd}/luv/library", words = { "vim%.uv" } }, "snacks.nvim" } } },

@@ -1,7 +1,13 @@
 local au = vim.api.nvim_create_autocmd
 
 -- Guardar al perder el foco (auto-save de Helix)
-au({ "FocusLost", "BufLeave" }, { command = "silent! wall" })
+au("FocusLost", {
+  callback = function()
+    vim.g.autosaving = true
+    vim.cmd("silent! wall")
+    vim.g.autosaving = false
+  end,
+})
 
 -- Resaltar lo copiado
 au("TextYankPost", { callback = function() vim.hl.on_yank({ timeout = 150 }) end })

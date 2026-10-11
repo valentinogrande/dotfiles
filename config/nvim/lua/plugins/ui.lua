@@ -52,6 +52,9 @@ return {
         { "<leader>u", group = "Activar/desactivar" },
         { "<leader>c", group = "Código / Crates" },
         { "<leader>R", group = "Rust" },
+        { "<leader>A", group = "Claude Code" },
+        { "<leader>T", group = "Tests" },
+        { "gs", group = "Rodear (surround)" },
       },
     },
     keys = {
