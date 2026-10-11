@@ -14,7 +14,10 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 autoload -Uz compinit
 # compinit completo (con auditoría) solo si el dump tiene más de 24h
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then compinit; else compinit -C; fi
+# (touch: compinit no reescribe el dump si no cambió y quedaría "viejo" para siempre)
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then compinit; touch ~/.zcompdump; else compinit -C; fi
+# Dump compilado a bytecode: carga más rápida
+[[ ~/.zcompdump.zwc -nt ~/.zcompdump ]] || zcompile ~/.zcompdump
 
 # --- PATH ---
 export PATH="$HOME/.local/bin:$PATH"
@@ -153,8 +156,8 @@ alias cd='z'
 # --- Starship prompt ---
 _cached_init starship init zsh
 
-# --- fastfetch al abrir terminal ---
-fastfetch
+# --- fastfetch bajo demanda (no al abrir: cero lag de arranque) ---
+alias ff='fastfetch'
 
 # --- pyenv ---
 export PYENV_ROOT="$HOME/.pyenv"

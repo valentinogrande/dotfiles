@@ -35,6 +35,13 @@ gtk-tabs-location = top
 gtk-single-instance = true
 quit-after-last-window-closed = false
 
+# Sin scope de systemd por ventana: evita una llamada D-Bus a systemd en cada ventana nueva
+linux-cgroup = never
+# Sin cartel de tamaño al redimensionar/retilear (Hyprland retilea en cada ventana nueva)
+resize-overlay = never
+# Sin toasts de "copiado"/"config recargada"
+app-notifications = no-clipboard-copy,no-config-reload
+
 # Sin campana
 bell-features = no-system,no-audio
 
