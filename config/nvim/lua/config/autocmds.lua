@@ -27,3 +27,26 @@ au("FileType", {
   pattern = { "python", "rust", "c", "cpp", "go", "sql" },
   callback = function() vim.bo.shiftwidth = 4; vim.bo.tabstop = 4 end,
 })
+
+-- Actualizar el índice de marksman al guardar (solo si el archivo ya tiene <!--toc:start-->)
+au("BufWritePre", {
+  pattern = "*.md",
+  callback = function(ev)
+    local client = vim.lsp.get_clients({ bufnr = ev.buf, name = "marksman" })[1]
+    if not client then return end
+    local lines = vim.api.nvim_buf_get_lines(ev.buf, 0, -1, false)
+    if not vim.iter(lines):any(function(l) return l:find("<!--toc:start-->", 1, true) end) then return end
+
+    local res = client:request_sync("textDocument/codeAction", {
+      textDocument = vim.lsp.util.make_text_document_params(ev.buf),
+      range = { start = { line = 0, character = 0 }, ["end"] = { line = 0, character = 0 } },
+      context = { diagnostics = {} },
+    }, 2000, ev.buf)
+    for _, a in ipairs(res and res.result or {}) do
+      if a.title:find("Table of Contents") and a.edit then
+        vim.lsp.util.apply_workspace_edit(a.edit, client.offset_encoding)
+        return
+      end
+    end
+  end,
+})
