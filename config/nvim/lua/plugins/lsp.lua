@@ -28,6 +28,8 @@ local servers = {
         language = "es",
         additionalRules = { motherTongue = "es" },
         dictionary = { es = dict_words() },
+        -- el "!" de los callouts de markdown (> [!TIP], > [!NOTE]...) lo toma como fin de oración
+        disabledRules = { es = { "ESPACIO_DESPUES_DE_PUNTO" } },
         -- como "warning" para que se vean inline (por defecto son "information")
         diagnosticSeverity = "warning",
       },
