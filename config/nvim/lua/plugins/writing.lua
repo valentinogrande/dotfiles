@@ -48,6 +48,22 @@ return {
     end,
     keys = { { "<leader>um", "<cmd>RenderMarkdown toggle<cr>", desc = "Activar/desactivar Markdown renderizado" } } },
 
+  -- lazy = false por el mismo E31: cargarlo por ft re-dispara FileType en markdown
+  { "iamcco/markdown-preview.nvim", lazy = false,
+    -- El build también inyecta assets/mkdp-alerts.js, porque el preview no renderiza los callouts > [!NOTE]
+    build = function(plugin)
+      vim.fn["mkdp#util#install"]()
+      local app = plugin.dir .. "/app"
+      vim.uv.fs_copyfile(vim.fn.stdpath("config") .. "/assets/mkdp-alerts.js", app .. "/_static/mkdp-alerts.js")
+      local index = app .. "/out/index.html"
+      local html = table.concat(vim.fn.readfile(index), "\n")
+      if not html:find("mkdp-alerts.js", 1, true) then
+        html = html:gsub("</body>", '<script src="/_static/mkdp-alerts.js"></script></body>', 1)
+        vim.fn.writefile(vim.split(html, "\n"), index)
+      end
+    end,
+    keys = { { "<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", ft = "markdown", desc = "Preview de Markdown en el navegador" } } },
+
   { "chomosuke/typst-preview.nvim", ft = "typst", version = "1.*",
     opts = { dependencies_bin = { tinymist = "tinymist" } },
     keys = { { "<leader>cp", "<cmd>TypstPreviewToggle<cr>", ft = "typst", desc = "Preview de Typst en el navegador" } } },
