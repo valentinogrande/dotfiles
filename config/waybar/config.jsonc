@@ -16,66 +16,67 @@
     },
 
     "mpris": {
-        "format": "  {title}",
-        "format-paused": "  {title}",
+        "format": "  {title}",
+        "format-paused": "  {title}",
         "max-length": 40,
         "tooltip-format": "{artist} - {title}"
     },
 
     "clock": {
         "interval": 30,
-        "format": "  {:%a %d %b   %H:%M}",
+        "format": "  {:%a %d %b   %H:%M}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>"
     },
 
     "pulseaudio": {
         "format": "{icon}  {volume}%",
         "format-muted": "󰝟  MUTE",
-        "format-icons": { "default": ["", "", ""] },
+        "format-icons": { "default": ["", "", ""] },
         "on-click": "pavucontrol",
         "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
 
     "backlight": {
         "format": "{icon}  {percent}%",
-        "format-icons": ["", "", ""],
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set +5%",
         "on-scroll-down": "brightnessctl set 5%-"
     },
 
     "disk": {
         "interval": 30,
-        "format": "  {percentage_used}%",
+        "format": "  {percentage_used}%",
         "path": "/"
     },
 
     "memory": {
         "interval": 5,
-        "format": "  {percentage}%"
+        "format": "󰍛  {percentage}%"
     },
 
     "cpu": {
         "interval": 5,
-        "format": "  {usage}%"
+        "format": "  {usage}%"
     },
 
     "temperature": {
         "critical-threshold": 80,
-        "format": "  {temperatureC}°C",
-        "format-critical": "  {temperatureC}°C"
+        "format": "  {temperatureC}°C",
+        "format-critical": "  {temperatureC}°C"
     },
 
     "network": {
-        "format-wifi": "  {signalStrength}%",
+        "format-wifi": "  {signalStrength}%",
         "format-ethernet": "󰈀  {ipaddr}",
         "format-disconnected": "󰤭  off",
+        "format-disabled": "󰤭  off",
         "tooltip-format": "{ifname}: {ipaddr}",
         "on-click": "~/.config/rofi/wifi.sh"
     },
 
     "bluetooth": {
-        "format": "",
-        "format-connected": "  {device_alias}",
+        "format": "",
+        "format-connected": "󰂱  {device_alias}",
         "format-disabled": "󰂲",
         "on-click": "~/.config/rofi/bluetooth.sh"
     },
@@ -83,8 +84,8 @@
     "battery": {
         "states": { "warning": 30, "critical": 15 },
         "format": "{icon}  {capacity}%",
-        "format-charging": "  {capacity}%",
-        "format-icons": ["", "", "", "", ""]
+        "format-charging": "󰂄  {capacity}%",
+        "format-icons": ["", "", "", "", ""]
     },
 
     "tray": {
